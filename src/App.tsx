@@ -1,11 +1,13 @@
 import { Counter } from './features/counter/Counter';
 import './App.css';
 import { useEffect, useState, VFC } from 'react';
+import { CleanUp } from './CleanUp';
 
 const App: VFC = () => {
   const [status, setStatus] = useState<string | number>("text");
   const [input, setInput] = useState("");
   const [counter, setCounter] = useState(0);
+  const [display, setDisplay] = useState(true);
 
   const onChangeHnadler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -24,7 +26,9 @@ const App: VFC = () => {
         <h4>{input}</h4>
         <input type="text" value={input} onChange={onChangeHnadler}></input>
         <h4>{counter}</h4>
-        <button onClick={() => setCounter((preCounter) => preCounter + 1)}>Button</button>
+        <button onClick={() => setCounter((preCounter) => preCounter + 1)}>Increment</button>
+        {display && <CleanUp />}
+        <button onClick={() => setDisplay(!display)}>Toggle display</button>
         <Counter />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
